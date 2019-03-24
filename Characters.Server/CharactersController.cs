@@ -1,6 +1,8 @@
 using IgiCore.Characters.Server.Models;
+using IgiCore.Characters.Server.Models.Items;
 using IgiCore.Characters.Server.Storage;
 using IgiCore.Characters.Shared;
+using IgiCore.Inventories.Server.Models;
 using JetBrains.Annotations;
 using NFive.SDK.Core.Diagnostics;
 using NFive.SDK.Core.Helpers;
@@ -13,6 +15,7 @@ using NFive.SDK.Server.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using Configuration = IgiCore.Characters.Shared.Configuration;
@@ -166,6 +169,7 @@ namespace IgiCore.Characters.Server
 
 			// Don't trust important values from clients
 			character.Id = GuidGenerator.GenerateTimeBasedGuid();
+			character.Created = DateTime.UtcNow;
 			character.UserId = e.User.Id;
 			character.Alive = true;
 			character.Health = 10000;
@@ -177,6 +181,31 @@ namespace IgiCore.Characters.Server
 			character.Appearance = new Appearance();
 			character.FaceShape = new FaceShape();
 			character.Heritage = new Heritage();
+			character.Inventory = new Container
+			{
+				Id = GuidGenerator.GenerateTimeBasedGuid(),
+				Created = DateTime.UtcNow,
+				MaximumSlots = 50,
+				MaximumWeight = 100
+			};
+
+			character.Inventory.Storage = new List<Storable>
+			{
+				new IdCard
+				{
+					ContainerId = character.Inventory.Id,
+					Id = GuidGenerator.GenerateTimeBasedGuid(),
+					Created = DateTime.UtcNow,
+					UserId = e.User.Id
+				},
+				new Phone
+				{
+					ContainerId = character.Inventory.Id,
+					Id = GuidGenerator.GenerateTimeBasedGuid(),
+					Created = DateTime.UtcNow,
+					Number = "1231231231"
+				}
+			};
 
 			// Save character
 			using (var context = new StorageContext())
@@ -223,7 +252,6 @@ namespace IgiCore.Characters.Server
 
 					transaction.Rollback();
 				}
-
 			}
 		}
 

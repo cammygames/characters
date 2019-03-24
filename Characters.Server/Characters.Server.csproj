@@ -59,6 +59,10 @@
       <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="IgiCore.Inventories.Server.net">
+      <HintPath>..\plugins\IgiCore\inventories\IgiCore.Inventories.Server.net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=2018.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.2018.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>False</Private>
@@ -89,6 +93,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="Z.EntityFramework.Plus.EF6, Version=1.8.23.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
       <HintPath>..\packages\Z.EntityFramework.Plus.EF6.1.8.23\lib\net45\Z.EntityFramework.Plus.EF6.dll</HintPath>
       <Private>False</Private>
@@ -98,7 +103,7 @@
     <Compile Include="CharacterManager.cs" />
     <Compile Include="Events\CharacterEventArgs.cs" />
     <Compile Include="Events\CharacterSessionEventArgs.cs" />
-    <Compile Include="Migrations\201903230015160_Init.cs" />
+    <Compile Include="Migrations\201903242112490_Init.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Appearance.cs" />
     <Compile Include="Models\Character.cs" />
@@ -106,6 +111,8 @@
     <Compile Include="Models\CharacterSession.cs" />
     <Compile Include="Models\FaceShape.cs" />
     <Compile Include="Models\Heritage.cs" />
+    <Compile Include="Models\Items\Phone.cs" />
+    <Compile Include="Models\Items\IdCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CharactersController.cs" />
     <Compile Include="Storage\StorageContext.cs" />

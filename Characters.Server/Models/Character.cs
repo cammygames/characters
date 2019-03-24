@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
+using IgiCore.Inventories.Server.Models;
 
 namespace IgiCore.Characters.Server.Models
 {
@@ -163,13 +164,18 @@ namespace IgiCore.Characters.Server.Models
 		public Guid FaceShapeId { get; set; }
 
 		public virtual FaceShape FaceShape { get; set; }
-
-
+		
 		[Required]
 		[ForeignKey("Heritage")]
 		public Guid HeritageId { get; set; }
 
 		public virtual Heritage Heritage { get; set; }
+
+		[Required]
+		[ForeignKey("Inventory")]
+		public Guid InventoryId { get; set; }
+
+		public virtual Container Inventory { get; set; }
 
 		/// <inheritdoc />
 		/// <summary>
